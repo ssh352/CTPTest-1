@@ -13,6 +13,7 @@ import com.sfit.ctp.thostmduserapi.CThostFtdcDepthMarketDataField;
 import com.sfit.ctp.thostmduserapi.CThostFtdcMdApi;
 import com.sfit.ctp.thostmduserapi.CThostFtdcReqUserLoginField;
 import com.sfit.ctp.thostmduserapi.CThostFtdcRspInfoField;
+import java.io.File;
 
 public class MainActivity extends Activity {
     private Handler mHandler;
@@ -37,10 +38,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        checkDirs();
         setHandler();
         initComponents();
     }
 
+    private void checkDirs() {
+        File dir = new File(Environment.getExternalStorageDirectory().toString() + "/ctplog" + "/");
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
+    
     private void initComponents() {
         loginButton = (Button) findViewById(R.id.login_button);
         connectButton = (Button) findViewById(R.id.connect_button);
